@@ -10,7 +10,7 @@ namespace ExerciseApp.Model
         public DateTime? DateOfBirth { get; set; }
 
         [StringLength(10)]
-        [Required(AllowEmptyStrings =false)]
+        [Required(AllowEmptyStrings = false)]
         public string Make { get; set; }
 
         [StringLength(10)]

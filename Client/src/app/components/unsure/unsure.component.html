@@ -1,63 +1,59 @@
 <div>
-  <form [formGroup]="quoteForm" (ngSubmit)="GetQuote()" >
+    <form [formGroup]="quoteForm" (ngSubmit)="GetQuote()" class="was-validated form-control-sm">
 
-    <div class="form-group">
-    <label>
-      Insurance Type:
-      <select  (change)="changeInsuranceType($event)" formControlName="insuranceType">
-        <option value="" disabled>Choose your type of insurance</option>
-        <option *ngFor="let type of details.insuranceTypes" [value]="type.type">{{type.description}}</option>
-     </select>
-    </label>
-    <div  class="error"  *ngIf="insuranceTypeCtrl.invalid && (insuranceTypeCtrl.dirty || insuranceTypeCtrl.touched)">
-      <div *ngIf="insuranceTypeCtrl.errors?.required">
-        Insurance type is required.
-      </div>
-    </div>
-  </div>
+        <div class="form-floating mb-2">
+            <select (change)="changeInsuranceType($event)" formControlName="insuranceType" aria-label="Select Insurance Type" class="form-control is-invalid w-75" id="validationInsuranceType" required>
+                <option value="" disabled>Choose your type of insurance</option>
+                <option *ngFor="let type of details.insuranceTypes" [value]="type.type">{{type.description}}</option>
+            </select>
+            <label for="validationInsuranceType" class="form-label">Insurance Type:</label>
+            <div class="invalid-feedback" *ngIf="insuranceTypeCtrl.invalid && (insuranceTypeCtrl.dirty || insuranceTypeCtrl.touched)">
+                <div *ngIf="insuranceTypeCtrl.errors?.required">
+                    Insurance type is required.
+                </div>
+            </div>
+        </div>
 
-  <div class="form-group">
-    <label>
-      Date of Birth:
-      <input type="date" formControlName="dateOfBirth">
-    </label>
-    <div  class="error"  *ngIf="dateOfBirthCtrl.invalid && (dateOfBirthCtrl.dirty || dateOfBirthCtrl.touched)">
-      <div *ngIf="dateOfBirthCtrl.errors?.required">
-        Date of Birth is required.
-      </div>
-    </div>
-  </div>  
-    <div class="form-group">
-      <label>
-      Make:
-      <select  (change)="changeMake($event)" formControlName="make">
-        <option value="" disabled>Choose your make</option>
-        <option *ngFor="let make of details.makes" [value]="make">{{make}}</option>
-     </select>
-    </label>
-    <div  class="error"  *ngIf="makeCtrl.invalid && (makeCtrl.dirty || makeCtrl.touched)">
-      <div *ngIf="makeCtrl.errors?.required">
-        Make is required.
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>
-      Model:
-      <select  (change)="changeModel($event)" formControlName="model">
-        <option value="" disabled>Choose your model</option>
-        <option *ngFor="let model of Models" [value]="model">{{model}}</option>
-     </select>
-    </label>
-    <div class="error" *ngIf="modelCtrl.invalid && (modelCtrl.dirty || modelCtrl.touched)">
-      <div *ngIf="modelCtrl.errors?.required">
-        Model is required.
-      </div>
-    </div>
-  </div>
-    <button type="submit"> Get Quote</button>
-    <!--decide when should be visible.  If GetQuote is no disabled, could do wait until clicked and on change of form data-->
-    <div class="error" [style.visibility]="quoteForm.valid || !touched ? 'hidden' : 'visible'">The form is not valid</div>
-    <div [style.visibility]="QuoteReceived ? 'visible' : 'hidden'">{{Quote}}</div>
-  </form>
+        <div class="form-floating mb-2">
+            <input type="date" formControlName="dateOfBirth" aria-label="Select Date of Birth" class="form-control is-invalid w-75" id="validationDateOfBirth" required>
+            <label for="validationDateOfBirth" class="form-label">Date of Birth:</label>
+            <div class="invalid-feedback" *ngIf="dateOfBirthCtrl.invalid && (dateOfBirthCtrl.dirty || dateOfBirthCtrl.touched)">
+                <div *ngIf="dateOfBirthCtrl.errors?.required">
+                    Date of Birth is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-floating mb-2">
+            <select (change)="changeMake($event)" formControlName="make" aria-label="Select Car Make" class="form-control is-invalid w-75" id="validationCarMake" required>
+                <option value="" disabled>Choose your make</option>
+                <option *ngFor="let make of details.makes" [value]="make">{{make}}</option>
+            </select>
+            <label for="validationCarMake" class="form-label">Make:</label>
+            <div class="invalid-feedback" *ngIf="makeCtrl.invalid && (makeCtrl.dirty || makeCtrl.touched)">
+                <div *ngIf="makeCtrl.errors?.required">
+                    Make is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-floating mb-2">
+            <select (change)="changeModel($event)" formControlName="model" aria-label="Select Car Model" class="form-control is-invalid w-75" id="validationCarModel" required>
+                <option value="" disabled>Choose your model</option>
+                <option *ngFor="let model of Models" [value]="model">{{model}}</option>
+            </select>
+            <label for="validationCarModel" class="form-label">Model:</label>
+            <div class="invalid-feedback" *ngIf="modelCtrl.invalid && (modelCtrl.dirty || modelCtrl.touched)">
+                <div *ngIf="modelCtrl.errors?.required">
+                    Model is required.
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Get Quote</button>
+        <!--decide when should be visible.  If GetQuote is no disabled, could do wait until clicked and on change of form data-->
+        <div class="text-danger" [style.visibility]="quoteForm.valid || !touched ? 'hidden' : 'visible'">The form is not valid</div>
+        <div [style.visibility]="QuoteReceived ? 'visible' : 'hidden'">£ {{Quote}}</div>
+
+    </form>
 </div>
