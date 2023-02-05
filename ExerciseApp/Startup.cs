@@ -1,6 +1,8 @@
+using ExerciseApp.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,17 +27,22 @@ namespace ExerciseApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(option=> { option.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); option.JsonSerializerOptions.IgnoreNullValues = true; });
+            services.AddControllers().AddJsonOptions(option => { option.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); option.JsonSerializerOptions.IgnoreNullValues = true; });
             services.AddCors();
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
+    Configuration.GetConnectionString("DefaultConnection")
+    ));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext db)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            db.Database.EnsureCreated();
             app.UseCors(builder =>
             {
                 builder.WithOrigins("*");

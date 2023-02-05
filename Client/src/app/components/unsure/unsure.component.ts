@@ -7,22 +7,21 @@ import { UnsureService } from 'src/app/service/unsure.service';
 @Component({
   selector: 'unsure',
   templateUrl: './unsure.component.html',
-  styleUrls: ['./unsure.component.scss']
+  styleUrls: ['./unsure.component.scss'],
 })
 export class UnsureComponent implements OnInit {
-
-  constructor(private unsureService: UnsureService ) {
+  constructor(private unsureService: UnsureService) {
     this.touched = false;
-   }
+  }
 
   touched: boolean;
   details: quoteDetail = new quoteDetail();
   Models: Array<string> = [];
-  Quote: number= 0;
-  QuoteReceived: boolean = false; 
+  Quote: number = 0;
+  QuoteReceived: boolean = false;
 
   ngOnInit(): void {
-    this.unsureService.getDetails<quoteDetail>().subscribe(s=>{
+    this.unsureService.getDetails<quoteDetail>().subscribe((s) => {
       this.details.makes = s.makes;
       this.details.models = s.models;
       this.details.insuranceTypes = s.insuranceTypes;
@@ -30,12 +29,11 @@ export class UnsureComponent implements OnInit {
     });
   }
 
-  
-  dateOfBirthCtrl= new FormControl('', Validators.required);
-  makeCtrl = new FormControl('',Validators.required);
-  modelCtrl = new FormControl('',Validators.required);
-  insuranceTypeCtrl = new FormControl('',Validators.required);
-  
+  dateOfBirthCtrl = new FormControl('', Validators.required);
+  makeCtrl = new FormControl('', Validators.required);
+  modelCtrl = new FormControl('', Validators.required);
+  insuranceTypeCtrl = new FormControl('', Validators.required);
+
   quoteForm = new FormGroup({
     dateOfBirth: this.dateOfBirthCtrl,
     make: this.makeCtrl,
@@ -44,37 +42,43 @@ export class UnsureComponent implements OnInit {
   });
 
   public changeMake(e: any) {
-    this.quoteForm.controls["make"].setValue(e.target.value, {  onlySelf: true  })
+    this.quoteForm.controls['make'].setValue(e.target.value, {
+      onlySelf: true,
+    });
     this.setModels();
   }
 
   public changeModel(e: any) {
-    this.quoteForm.controls["model"].setValue(e.target.value, {  onlySelf: true  })
+    this.quoteForm.controls['model'].setValue(e.target.value, {
+      onlySelf: true,
+    });
   }
 
   public changeInsuranceType(e: any) {
-    this.quoteForm.controls["insuranceType"].setValue(e.target.value, {  onlySelf: true  })
+    this.quoteForm.controls['insuranceType'].setValue(e.target.value, {
+      onlySelf: true,
+    });
   }
 
-  setModels(){
-    let currentMake = this.quoteForm.controls["make"].value;
+  setModels() {
+    let currentMake = this.quoteForm.controls['make'].value;
     this.Models = [];
-    let makes = this.details.models.filter(function(m){return m.make == currentMake});
-    if (makes.length > 0)
-      this.Models = makes[0].models;
+    let makes = this.details.models.filter(function (m) {
+      return m.make == currentMake;
+    });
+    if (makes.length > 0) this.Models = makes[0].models;
   }
 
-  GetQuote()
-  {
+  GetQuote() {
     this.touched = true;
-    if (!this.quoteForm.invalid && this.touched)
-    {
-      this.unsureService.GetQuote<quoteResponse>(this.quoteForm.value).subscribe(s=>{
-        this.QuoteReceived = true;
-        this.Quote = s.quote;
-        this.setModels();
-      });
-      }
+    if (!this.quoteForm.invalid && this.touched) {
+      this.unsureService
+        .GetQuote<quoteResponse>(this.quoteForm.value)
+        .subscribe((s) => {
+          this.QuoteReceived = true;
+          this.Quote = s.quote;
+          this.setModels();
+        });
+    }
   }
-
 }

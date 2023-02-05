@@ -1,4 +1,6 @@
 using ExerciseApp.Model;
+using Microsoft.VisualBasic;
+using System;
 
 namespace ExerciseApp.Services
 {
@@ -29,42 +31,55 @@ namespace ExerciseApp.Services
 
         public decimal PerformQuote(QuoteRequest request)
         {
+            var quoteEstimation = 0;
             if (request.InsuranceType == InsuranceType.itFullyComprehensive)
             {
                 if (request.Make == "Ford")
-                    return 200;
+                    quoteEstimation += 200;
                 if (request.Make == "BMW")
                 {
                     if (request.Model == "X5")
-                        return 500;
+                        quoteEstimation += 500;
                     else
-                        return 400;
+                        quoteEstimation += 400;
                 }
-                return 300;
             }
             if (request.InsuranceType == InsuranceType.itThirdPartyFireAndTheft) {
                 if (request.Make == "Ford")
-                    return 180;
+                    quoteEstimation += 180;
                 if (request.Make == "BMW")
                 {
                     if (request.Model == "X5")
-                        return 510;
+                        quoteEstimation += 510;
                     else
-                        return 400;
+                        quoteEstimation += 400;
                 }
-                return 300;
             }
             if (request.InsuranceType == InsuranceType.itThirdPartyOnly)
             {
                 if (request.Make == "Ford")
-                    return 180;
+                    quoteEstimation += 180;
                 if (request.Make == "Audi")
                 {
-                    return 250;
+                    quoteEstimation += 250;
                 }
-                return 300;
             }
+            var age =  DateTime.Now.Year - request.DateOfBirth.Value.Year;
+            if (request.DateOfBirth != null)
+            {
+
+                if (age > 18 && age < 80)
+                {
+                    quoteEstimation += 400;
+                }
+                else {
+                    quoteEstimation += 300;
+                }
+            }
+            if (quoteEstimation == 0)
             return 0;
+            else 
+                return quoteEstimation;
         }
     }
 }
