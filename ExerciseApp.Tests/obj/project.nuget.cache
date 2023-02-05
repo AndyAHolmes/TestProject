@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Rwt3H66IF4DCc8azqKRiXpKi+2fwjpL3C9aMOj1wH+bPCLmopCQsamJ3gRiUK3RBQyvHMmwP07qnc3jQaFFcaQ==",
+  "dgSpecHash": "zSdQaMt1SybwJhZDhPRLVGDfr46vcRWk/gU/mulAQlX8VfaiYsuiKOCq1naGByRnbGfDxtW5GnbEYAsR4/1W7w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohamed Ghassar\\.nuget\\packages\\microsoft.codecoverage\\16.10.0\\microsoft.codecoverage.16.10.0.nupkg.sha512",
     "C:\\Users\\Mohamed Ghassar\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",

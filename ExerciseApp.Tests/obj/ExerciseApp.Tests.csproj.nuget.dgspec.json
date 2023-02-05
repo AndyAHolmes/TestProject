@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj": {}
+    "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj": {
+    "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj",
         "projectName": "ExerciseApp.Tests",
-        "projectPath": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj",
+        "projectPath": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp.Tests\\ExerciseApp.Tests.csproj",
         "packagesPath": "C:\\Users\\Mohamed Ghassar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp.Tests\\obj\\",
+        "outputPath": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mohamed Ghassar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj": {
-                "projectPath": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj"
+              "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj": {
+                "projectPath": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj"
               }
             }
           }
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj": {
+    "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj",
+        "projectUniqueName": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj",
         "projectName": "ExerciseApp",
-        "projectPath": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj",
+        "projectPath": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp\\ExerciseApp.csproj",
         "packagesPath": "C:\\Users\\Mohamed Ghassar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mohamed Ghassar\\source\\repos\\TestProject\\ExerciseApp\\obj\\",
+        "outputPath": "C:\\Users\\Mohamed Ghassar\\Source\\Repos\\TestProject\\ExerciseApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mohamed Ghassar\\AppData\\Roaming\\NuGet\\NuGet.Config",
