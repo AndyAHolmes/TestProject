@@ -1,2 +1,18 @@
 @import "custom_variables";
-@import "../../../../node_modules/bootstrap/scss/bootstrap"; 
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+#id {
+  border: 2px solid;
+  margin-top: 10px;
+}
+
+#id input {
+  display: inline;
+  width: 100%;
+}
+#id select {
+  display: inline;
+  width: 100%;
+}
+.btnSubmit {
+  margin-right: 10px;
+}
