@@ -1,4 +1,6 @@
 using ExerciseApp.Model;
+using Microsoft.VisualBasic;
+using System;
 
 namespace ExerciseApp.Services
 {
@@ -63,6 +65,17 @@ namespace ExerciseApp.Services
                     return 250;
                 }
                 return 300;
+            }
+            var age =  DateTime.Now.Year - request.DateOfBirth.Value.Year;
+            if (request.DateOfBirth != null)
+            {
+                if (age > 18 && age < 80)
+                {
+                    return 400;
+                }
+                else {
+                    return 300;
+                }
             }
             return 0;
         }
