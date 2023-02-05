@@ -69,6 +69,7 @@ namespace ExerciseApp.Services
             var age =  DateTime.Now.Year - request.DateOfBirth.Value.Year;
             if (request.DateOfBirth != null)
             {
+
                 if (age > 18 && age < 80)
                 {
                     return 400;
