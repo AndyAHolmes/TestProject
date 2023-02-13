@@ -2,8 +2,11 @@ using ExerciseApp.Model;
 
 namespace ExerciseApp.Services
 {
-    public class QuoteService
+    public class QuoteService  : AbstractService
     {
+        // Init the quoteService with min_age and max_age
+        public QuoteService(int MIN_AGE, int MAX_AGE): base(MIN_AGE, MAX_AGE) 
+        { }
         public QuoteDetail GetQuoteDetail()
         {
             var quoteDetail = new QuoteDetail();
@@ -20,7 +23,8 @@ namespace ExerciseApp.Services
             modelSpec.Models.AddRange(new[] { "A3", "A4", "A5" });
             quoteDetail.Models.Add(modelSpec);
 
-            modelSpec = new ModelSpec { Make = "BMS" };
+            // Fix Typo
+            modelSpec = new ModelSpec { Make = "BMW" }; 
             modelSpec.Models.AddRange(new[] { "X5", "3 Series", "5 Series" });
             quoteDetail.Models.Add(modelSpec);
 

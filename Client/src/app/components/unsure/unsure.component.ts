@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { quoteDetail } from 'src/app/Model/QuoteDetail';
 import { quoteResponse } from 'src/app/Model/QuoteResponse';
 import { UnsureService } from 'src/app/service/unsure.service';
+import { AgeValidator } from './unsure.validator'
 
 @Component({
   selector: 'unsure',
@@ -30,8 +31,11 @@ export class UnsureComponent implements OnInit {
     });
   }
 
-  
-  dateOfBirthCtrl= new FormControl('', Validators.required);
+  //Add the age validator
+  dateOfBirthCtrl= new FormControl('', 
+    [Validators.required, 
+      AgeValidator()]
+  );
   makeCtrl = new FormControl('',Validators.required);
   modelCtrl = new FormControl('',Validators.required);
   insuranceTypeCtrl = new FormControl('',Validators.required);

@@ -1,7 +1,10 @@
-﻿using ExerciseApp.Model;
+﻿using System;
+using ExerciseApp.Model;
 using ExerciseApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ExerciseApp.Storeage;
+
 
 namespace ExerciseApp.Controllers
 {
@@ -10,7 +13,7 @@ namespace ExerciseApp.Controllers
     public class QuoteController : ControllerBase
     {
         
-        private readonly QuoteService _quoteService = new QuoteService();
+        private readonly QuoteService _quoteService = new QuoteService(17, 80); //Pass min_age and max_age into quoteService
         public QuoteController()
         {
 
@@ -26,12 +29,16 @@ namespace ExerciseApp.Controllers
         public QuoteResponse Post(QuoteRequest request)
         {
             var returnObject = new QuoteResponse() { QuoteRequestValid = false };
-            if (TryValidateModel(request))
+            if (TryValidateModel(request) && _quoteService.isValidAge((DateTime)request.DateOfBirth)) // Check if DOB is valid
             {
                 returnObject.QuoteRequestValid = true;
                 returnObject.Quote = _quoteService.PerformQuote(request);
             }
-            
+
+            //Store the request object into singleton instance
+            SingletonDB singleDB = SingletonDB.GetInstance;
+            singleDB.addRequest(request);
+
             return returnObject;
         }
 

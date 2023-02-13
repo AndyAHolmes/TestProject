@@ -25,6 +25,9 @@
       <div *ngIf="dateOfBirthCtrl.errors?.required">
         Date of Birth is required.
       </div>
+      <div *ngIf="dateOfBirthCtrl.errors?.invalidAge">
+        Your age is invalid to get a quote. Should be over 17 or under 80.
+      </div>
     </div>
   </div>  
     <div class="form-group">
