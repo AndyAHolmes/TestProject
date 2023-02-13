@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+//Simply uncomment below to enable attribute valiation
+//using static ExerciseApp.Validators.CustomValidation;
 
 namespace ExerciseApp.Model
 {
@@ -7,6 +9,8 @@ namespace ExerciseApp.Model
     {
         [DataType(DataType.Date)]
         [Required]
+        //Simply uncomment below to enable attribute valiation
+        //[checkDateOfBirth(ErrorMessage = ("People under the age of 17 and over the age of 80 can not receive a quote"))]
         public DateTime? DateOfBirth { get; set; }
 
         [StringLength(10)]
