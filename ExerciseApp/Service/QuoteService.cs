@@ -1,10 +1,18 @@
 using System;
 using ExerciseApp.Model;
+using ExerciseApp.Service;
 
 namespace ExerciseApp.Services
 {
     public class QuoteService : IQuoteService
     {
+        private readonly IInsuranceQuoteFactory insuranceQuoteFactory;
+
+        public QuoteService(IInsuranceQuoteFactory insuranceQuoteFactory)
+        {
+            this.insuranceQuoteFactory = insuranceQuoteFactory;
+        }
+
         public QuoteDetail GetQuoteDetail()
         {
             var quoteDetail = new QuoteDetail();
@@ -32,43 +40,48 @@ namespace ExerciseApp.Services
         {
             ValidateRequest(request);
 
-            if (request.InsuranceType == InsuranceType.itFullyComprehensive)
+            var engine = insuranceQuoteFactory.GetInsuranceTypeEngine(request.InsuranceType);
+
+            return engine.GenerateQuote(request);
+        }
+
+        private static decimal ThirdPartyQuote(QuoteRequest request)
+        {
+            if (request.Make == "Ford")
+                return 180;
+            if (request.Make == "Audi")
             {
-                if (request.Make == "Ford")
-                    return 200;
-                if (request.Make == "BMW")
-                {
-                    if (request.Model == "X5")
-                        return 500;
-                    else
-                        return 400;
-                }
-                return 300;
+                return 250;
             }
-            if (request.InsuranceType == InsuranceType.itThirdPartyFireAndTheft)
+            return 300;
+        }
+
+        private static decimal ThirdPartyFireAndTheftQuote(QuoteRequest request)
+        {
+            if (request.Make == "Ford")
+                return 180;
+            if (request.Make == "BMW")
             {
-                if (request.Make == "Ford")
-                    return 180;
-                if (request.Make == "BMW")
-                {
-                    if (request.Model == "X5")
-                        return 510;
-                    else
-                        return 400;
-                }
-                return 300;
+                if (request.Model == "X5")
+                    return 510;
+                else
+                    return 400;
             }
-            if (request.InsuranceType == InsuranceType.itThirdPartyOnly)
+            return 300;
+        }
+
+        private static decimal FullyCompQuote(QuoteRequest request)
+        {
+            if (request.Make == "Ford")
+                return 200;
+            if (request.Make == "BMW")
             {
-                if (request.Make == "Ford")
-                    return 180;
-                if (request.Make == "Audi")
-                {
-                    return 250;
-                }
-                return 300;
+                if (request.Model == "X5")
+                    return 500;
+                else
+                    return 400;
             }
-            return 0;
+            return 300;
         }
 
         private void ValidateRequest(QuoteRequest request)

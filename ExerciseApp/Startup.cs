@@ -1,3 +1,4 @@
+using ExerciseApp.Service;
 using ExerciseApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,11 @@ namespace ExerciseApp
             services.AddControllers().AddJsonOptions(option=> { option.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); option.JsonSerializerOptions.IgnoreNullValues = true; });
             services.AddCors();
             services.AddSingleton<IQuoteService, QuoteService>();
+            services.AddSingleton<IInsuranceQuoteFactory, InsuranceQuoteFactory>();
+            services.AddSingleton<InsuranceQuoteEngine, FullyCompInsuranceEngine>();
+            services.AddSingleton<InsuranceQuoteEngine, ThirdPartyInsuranceEngine>();
+            services.AddSingleton<InsuranceQuoteEngine, ThirdPartyFireAndTheftInsuranceEngine>();
+            services.AddSingleton<InsuranceQuoteEngine, InvalidInsuranceEngine>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
