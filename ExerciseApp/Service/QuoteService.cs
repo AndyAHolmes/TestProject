@@ -1,3 +1,4 @@
+using System;
 using ExerciseApp.Model;
 
 namespace ExerciseApp.Services
@@ -29,6 +30,8 @@ namespace ExerciseApp.Services
 
         public decimal PerformQuote(QuoteRequest request)
         {
+            ValidateRequest(request);
+
             if (request.InsuranceType == InsuranceType.itFullyComprehensive)
             {
                 if (request.Make == "Ford")
@@ -66,6 +69,20 @@ namespace ExerciseApp.Services
                 return 300;
             }
             return 0;
+        }
+
+        private void ValidateRequest(QuoteRequest request)
+        {
+            int maxAgeInYears = 80;
+            int minAgeInYears = 17;
+
+            if (request.DateOfBirth < DateTime.UtcNow.AddYears(0 - maxAgeInYears)) 
+                throw new Exception($"Quote request exceeds maximum age limit in years: {maxAgeInYears}");
+
+
+            if (request.DateOfBirth > DateTime.UtcNow.AddYears(0 - minAgeInYears))
+                throw new Exception($"Quote request is under the minimum age limit in years: {minAgeInYears}");
+
         }
     }
 }

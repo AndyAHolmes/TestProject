@@ -1,5 +1,6 @@
 ﻿using ExerciseApp.Services;
 using System;
+using System.Reflection;
 using Xunit;
 
 namespace ExerciseApp.Tests
@@ -63,5 +64,24 @@ namespace ExerciseApp.Tests
             Assert.Equal(quote, quoteResult);
         }
 
+        [Theory]
+        [InlineData(15)]
+        [InlineData(90)]
+        public void WhenAgeOutOfRangeIsProvided_NoQuoteProduced(int age)
+        {
+            var qs = new QuoteService();
+
+            var quoteModel = new Model.QuoteRequest
+            {
+                DateOfBirth = DateTime.UtcNow.AddYears(0-age),
+                InsuranceType = Model.InsuranceType.itThirdPartyOnly,
+                Make = "Ford",
+                Model = "Focus"
+            };
+
+            Assert.ThrowsAny<Exception>(() => qs.PerformQuote(quoteModel));
+        }
+
+        
     }
 }
