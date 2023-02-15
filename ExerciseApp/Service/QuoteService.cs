@@ -2,7 +2,7 @@ using ExerciseApp.Model;
 
 namespace ExerciseApp.Services
 {
-    public class QuoteService
+    public class QuoteService : IQuoteService
     {
         public QuoteDetail GetQuoteDetail()
         {
@@ -13,7 +13,7 @@ namespace ExerciseApp.Services
             quoteDetail.Makes.Add("BMW");
 
             var modelSpec = new ModelSpec { Make = "Ford" };
-            modelSpec.Models.AddRange(new []{ "Fiesta", "Focus", "Puma", "S Max" });
+            modelSpec.Models.AddRange(new[] { "Fiesta", "Focus", "Puma", "S Max" });
             quoteDetail.Models.Add(modelSpec);
 
             modelSpec = new ModelSpec { Make = "Audi" };
@@ -42,7 +42,8 @@ namespace ExerciseApp.Services
                 }
                 return 300;
             }
-            if (request.InsuranceType == InsuranceType.itThirdPartyFireAndTheft) {
+            if (request.InsuranceType == InsuranceType.itThirdPartyFireAndTheft)
+            {
                 if (request.Make == "Ford")
                     return 180;
                 if (request.Make == "BMW")
