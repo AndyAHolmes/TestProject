@@ -1,7 +1,6 @@
 ﻿using ExerciseApp.Model;
 using ExerciseApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ExerciseApp.Controllers
 {
@@ -9,17 +8,17 @@ namespace ExerciseApp.Controllers
     [Route("[controller]")]
     public class QuoteController : ControllerBase
     {
-        
-        private readonly QuoteService _quoteService = new QuoteService();
-        public QuoteController()
-        {
+        private readonly IQuoteService quoteService;
 
+        public QuoteController(IQuoteService quoteService)
+        {
+            this.quoteService = quoteService;
         }
 
         [HttpGet]
         public QuoteDetail Get()
         {
-            return _quoteService.GetQuoteDetail();
+            return quoteService.GetQuoteDetail();
         }
 
         [HttpPost]
@@ -29,7 +28,7 @@ namespace ExerciseApp.Controllers
             if (TryValidateModel(request))
             {
                 returnObject.QuoteRequestValid = true;
-                returnObject.Quote = _quoteService.PerformQuote(request);
+                returnObject.Quote = quoteService.PerformQuote(request);
             }
             
             return returnObject;

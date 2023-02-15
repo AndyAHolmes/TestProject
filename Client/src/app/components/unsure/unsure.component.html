@@ -22,6 +22,9 @@
       <input type="date" formControlName="dateOfBirth">
     </label>
     <div  class="error"  *ngIf="dateOfBirthCtrl.invalid && (dateOfBirthCtrl.dirty || dateOfBirthCtrl.touched)">
+      <div *ngIf="dateOfBirthCtrl.errors?.invalidAge">
+        You need to be over the age of 17 or under the age of 80.
+      </div>
       <div *ngIf="dateOfBirthCtrl.errors?.required">
         Date of Birth is required.
       </div>
