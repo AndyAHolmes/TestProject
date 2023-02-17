@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UnsureComponent } from './unsure.component';
+import { FormControl } from '@angular/forms';
+import { AgeValidator } from './unsure.validation';
 
 
 describe('UnsureComponent', () => {
@@ -21,5 +23,23 @@ describe('UnsureComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('CustomValidator', () => {
+    beforeEach(() => TestBed.configureTestingModule({}));
+
+    const control = new FormControl('',AgeValidator());
+    it('valid DOB, expect invalidAge to be null', () => {
+      control.setValue('1992-01-01');
+      expect(control.hasError('invalidAge')).toBe(false);
+    });
+    it('invalid DOB, under 17, expect invalidAge to be false', () => {
+      control.setValue('2023-01-01');
+      expect(control.hasError('invalidAge')).toBe(true);
+    });  
+    it('invalid DOB, over 80, expect invalidAge to be false', () => {
+      control.setValue('1923-01-01');
+      expect(control.hasError('invalidAge')).toBe(true);
+    });  
   });
 });

@@ -254,3 +254,4 @@ ModelManifest.xml
 *.jfm
 
 dist/**
+Client/dist/out-tsc/*

@@ -1,3 +1,25 @@
+div.form
+{
+    display: block;
+    text-align: center;
+    padding: 1em 3em 2em 3em;
+}
+form {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #000000;
+  background-color: #bfd3fd;
+  align-self: center;
+  width: max-content;
+  text-align: center;
+  margin: 0em, auto;
+  display: inline-block;
+  padding: 1em 3em 2em 3em;
+}
+h4 {
+  color: #000000;
+}
+
 .error{
 color: red;
 }
