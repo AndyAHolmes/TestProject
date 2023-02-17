@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ExerciseApp.Helpers
 {
-    public static class EnumSuport {
+    public static class EnumSupport {
         public static string GetEnumDescription(this Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());

@@ -1,3 +1,5 @@
+using System;
+using ExerciseApp.Helpers;
 using ExerciseApp.Model;
 
 namespace ExerciseApp.Services
@@ -8,63 +10,48 @@ namespace ExerciseApp.Services
         {
             var quoteDetail = new QuoteDetail();
 
-            quoteDetail.Makes.Add("Ford");
-            quoteDetail.Makes.Add("Audi");
-            quoteDetail.Makes.Add("BMW");
+            quoteDetail.Makes.Add(Constants.Makes.Ford);
+            quoteDetail.Makes.Add(Constants.Makes.Audi);
+            quoteDetail.Makes.Add(Constants.Makes.Bmw);
 
-            var modelSpec = new ModelSpec { Make = "Ford" };
-            modelSpec.Models.AddRange(new []{ "Fiesta", "Focus", "Puma", "S Max" });
+            var modelSpec = new ModelSpec { Make = Constants.Makes.Ford };
+            modelSpec.Models.AddRange(new []{ Constants.Models.Fiesta, Constants.Models.Focus, Constants.Models.Puma, Constants.Models.SMax });
             quoteDetail.Models.Add(modelSpec);
 
-            modelSpec = new ModelSpec { Make = "Audi" };
-            modelSpec.Models.AddRange(new[] { "A3", "A4", "A5" });
+            modelSpec = new ModelSpec { Make = Constants.Makes.Audi };
+            modelSpec.Models.AddRange(new[] { Constants.Models.A3, Constants.Models.A4, Constants.Models.A5 });
             quoteDetail.Models.Add(modelSpec);
 
-            modelSpec = new ModelSpec { Make = "BMS" };
-            modelSpec.Models.AddRange(new[] { "X5", "3 Series", "5 Series" });
+            modelSpec = new ModelSpec { Make = Constants.Makes.Bmw };
+            modelSpec.Models.AddRange(new[] { Constants.Models.X5, Constants.Models.Series3, Constants.Models.Series5 });
             quoteDetail.Models.Add(modelSpec);
 
             return quoteDetail;
         }
 
-        public decimal PerformQuote(QuoteRequest request)
+        public string PerformQuote(QuoteRequest request)
         {
-            if (request.InsuranceType == InsuranceType.itFullyComprehensive)
+            if (!request.DateOfBirth.CalculateIfAgeIsValid())
             {
-                if (request.Make == "Ford")
-                    return 200;
-                if (request.Make == "BMW")
-                {
-                    if (request.Model == "X5")
-                        return 500;
-                    else
-                        return 400;
-                }
-                return 300;
+                return "We cannot provide a quote for you at this time, you do not meet the required criteria";
             }
-            if (request.InsuranceType == InsuranceType.itThirdPartyFireAndTheft) {
-                if (request.Make == "Ford")
-                    return 180;
-                if (request.Make == "BMW")
-                {
-                    if (request.Model == "X5")
-                        return 510;
-                    else
-                        return 400;
-                }
-                return 300;
-            }
-            if (request.InsuranceType == InsuranceType.itThirdPartyOnly)
+
+            switch (request.InsuranceType)
             {
-                if (request.Make == "Ford")
-                    return 180;
-                if (request.Make == "Audi")
-                {
-                    return 250;
-                }
-                return 300;
+                case InsuranceType.itFullyComprehensive:
+                    return request.CalculateFullyComprehensive().ConvertQuoteToString();
+                case InsuranceType.itThirdPartyFireAndTheft:
+                    return request.CalculateThirdPartyFireAndTheft().ConvertQuoteToString();
+                case InsuranceType.itThirdPartyOnly:
+                    return request.CalculateThirdPartyOnly().ConvertQuoteToString();
+                default:
+                    return "Insurance Type not specified";
             }
-            return 0;
+        }
+
+        public bool CalculateIfAgeIsValid(DateTime? dateOfBirth)
+        {
+            return dateOfBirth.CalculateIfAgeIsValid();
         }
     }
 }
