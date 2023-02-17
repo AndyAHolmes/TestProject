@@ -1,8 +1,8 @@
-namespace ExerciseApp.Model
+namespace ExerciseApp.Model;
+
+public class QuoteResponse
 {
-    public class QuoteResponse
-    {
-       public bool QuoteRequestValid { get; set; }
-       public decimal Quote{ get; set; }
-    }
+    public bool QuoteRequestValid { get; set; }
+    public decimal Quote{ get; set; }
+    public string QuoteUID { get; set; }
 }

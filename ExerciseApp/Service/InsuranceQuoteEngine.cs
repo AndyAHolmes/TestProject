@@ -1,11 +1,10 @@
 ﻿using System;
 using ExerciseApp.Model;
 
-namespace ExerciseApp.Service
+namespace ExerciseApp.Service;
+
+public class InsuranceQuoteEngine
 {
-	public interface InsuranceQuoteEngine
-	{
-		decimal GenerateQuote(QuoteRequest request);
-    }
+    public virtual decimal GenerateQuote(QuoteRequest request) => 0;
 }
 

@@ -1,32 +1,37 @@
 ﻿using System;
 using ExerciseApp.Model;
 
-namespace ExerciseApp.Service
-{
-    public class InsuranceQuoteFactory : IInsuranceQuoteFactory
-    {
-        private readonly IServiceProvider serviceProvider;
+namespace ExerciseApp.Service;
 
-        public InsuranceQuoteFactory(IServiceProvider serviceProvider)
+public class InsuranceQuoteFactory : IInsuranceQuoteFactory
+{
+    private FullyCompInsuranceEngine fullyCompEngine;
+    private ThirdPartyFireAndTheftInsuranceEngine thirdPartyFandTEngine;
+    private ThirdPartyInsuranceEngine thirdPartyEngine;
+    private InsuranceQuoteEngine defaultEngine;
+
+    public InsuranceQuoteFactory()
+    {
+        this.fullyCompEngine = new FullyCompInsuranceEngine();
+        this.thirdPartyFandTEngine = new ThirdPartyFireAndTheftInsuranceEngine();
+        this.thirdPartyEngine = new ThirdPartyInsuranceEngine();
+        this.defaultEngine = new InsuranceQuoteEngine();
+    }
+    public InsuranceQuoteEngine GetInsuranceTypeEngine(InsuranceType? insuranceType)
+    {
+        if (insuranceType == InsuranceType.itFullyComprehensive)
         {
-            this.serviceProvider = serviceProvider;
+            return fullyCompEngine;
         }
-        public InsuranceQuoteEngine GetInsuranceTypeEngine(InsuranceType? insuranceType)
+        if (insuranceType == InsuranceType.itThirdPartyFireAndTheft)
         {
-            if (insuranceType == InsuranceType.itFullyComprehensive)
-            {
-                return (InsuranceQuoteEngine)serviceProvider.GetService(typeof(FullyCompInsuranceEngine));
-            }
-            if (insuranceType == InsuranceType.itThirdPartyFireAndTheft)
-            {
-                return (InsuranceQuoteEngine)serviceProvider.GetService(typeof(ThirdPartyFireAndTheftInsuranceEngine));
-            }
-            if (insuranceType == InsuranceType.itThirdPartyOnly)
-            {
-                return (InsuranceQuoteEngine)serviceProvider.GetService(typeof(ThirdPartyInsuranceEngine));
-            }
-            return (InsuranceQuoteEngine)serviceProvider.GetService(typeof(InvalidInsuranceEngine));
+            return thirdPartyFandTEngine;
         }
+        if (insuranceType == InsuranceType.itThirdPartyOnly)
+        {
+            return thirdPartyEngine;
+        }
+        return defaultEngine;
     }
 }
 
