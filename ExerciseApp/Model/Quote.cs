@@ -3,21 +3,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExerciseApp.Model
 {
-    public class QuoteRequest
+    public class Quote
     {
-        [DataType(DataType.Date)]
-        [Required]
+        [Key]
+        public long Id { get; set; }
+        
         public DateTime? DateOfBirth { get; set; }
-
-        [StringLength(10)]
-        [Required(AllowEmptyStrings = false)]
+        
         public string Make { get; set; }
-
-        [StringLength(10)]
-        [Required(AllowEmptyStrings = false)]
+        
         public string Model { get; set; }
-
-        [Required]
+        
         public InsuranceType? InsuranceType { get; set; }
+
+        public string QuoteReturned { get; set; }
     }
 }

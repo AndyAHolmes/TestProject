@@ -1,7 +1,8 @@
-﻿using ExerciseApp.Model;
+﻿using System;
+using ExerciseApp.Context;
+using ExerciseApp.Model;
 using ExerciseApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ExerciseApp.Controllers
 {
@@ -9,11 +10,12 @@ namespace ExerciseApp.Controllers
     [Route("[controller]")]
     public class QuoteController : ControllerBase
     {
-        
+        private readonly DatabaseContext _db;
         private readonly QuoteService _quoteService = new QuoteService();
-        public QuoteController()
-        {
 
+        public QuoteController(DatabaseContext db)
+        {
+            _db = db;
         }
 
         [HttpGet]
@@ -25,15 +27,28 @@ namespace ExerciseApp.Controllers
         [HttpPost]
         public QuoteResponse Post(QuoteRequest request)
         {
-            var returnObject = new QuoteResponse() { QuoteRequestValid = false };
+            var returnObject = new QuoteResponse { QuoteRequestValid = false };
+            var ticks = DateTime.Now.Ticks;
+            
             if (TryValidateModel(request))
             {
                 returnObject.QuoteRequestValid = true;
                 returnObject.Quote = _quoteService.PerformQuote(request);
+
+                _db.Quote.Add(new Quote
+                {
+                    Id = ticks,
+                    DateOfBirth = request.DateOfBirth,
+                    InsuranceType = request.InsuranceType,
+                    Make = request.Make,
+                    Model = request.Model,
+                    QuoteReturned = returnObject.Quote
+                });
+
+                _db.SaveChanges();
             }
-            
+
             return returnObject;
         }
-
     }
 }

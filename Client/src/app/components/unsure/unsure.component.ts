@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { quoteDetail } from 'src/app/Model/QuoteDetail';
 import { quoteResponse } from 'src/app/Model/QuoteResponse';
 import { UnsureService } from 'src/app/service/unsure.service';
@@ -18,7 +18,7 @@ export class UnsureComponent implements OnInit {
   touched: boolean;
   details: quoteDetail = new quoteDetail();
   Models: Array<string> = [];
-  Quote: number= 0;
+  Quote: string = "";
   QuoteReceived: boolean = false; 
 
   ngOnInit(): void {
@@ -31,12 +31,12 @@ export class UnsureComponent implements OnInit {
   }
 
   
-  dateOfBirthCtrl= new FormControl('', Validators.required);
-  makeCtrl = new FormControl('',Validators.required);
-  modelCtrl = new FormControl('',Validators.required);
-  insuranceTypeCtrl = new FormControl('',Validators.required);
+  dateOfBirthCtrl= new UntypedFormControl('', Validators.required);
+  makeCtrl = new UntypedFormControl('',Validators.required);
+  modelCtrl = new UntypedFormControl('',Validators.required);
+  insuranceTypeCtrl = new UntypedFormControl('',Validators.required);
   
-  quoteForm = new FormGroup({
+  quoteForm = new UntypedFormGroup({
     dateOfBirth: this.dateOfBirthCtrl,
     make: this.makeCtrl,
     model: this.modelCtrl,
